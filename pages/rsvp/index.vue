@@ -41,7 +41,7 @@
             <label for="partySize">Party Size</label>
             <div class="select-wrapper">
               <select id="partySize" v-model="form.partySize" :disabled="loading">
-                <option v-for="n in 2" :key="n" :value="n">{{ n }}</option>
+                <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
               </select>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default {
         // We include BOTH the internal variable names and the Sheet Header names
         // to ensure the script finds the data regardless of which it expects.
         const formData = new URLSearchParams();
-        
+
         // Common timestamp
         formData.append("timestamp", new Date().toISOString());
         formData.append("Timestamp", new Date().toISOString());
@@ -241,7 +241,7 @@ export default {
 
 .select-wrapper {
   position: relative;
-  
+
   // Custom arrow
   &::after {
     content: "▼";
@@ -290,17 +290,17 @@ export default {
 
 .success-message {
   padding: 2rem 0;
-  
+
   .success-icon {
     font-size: 4rem;
     color: #0f9d58;
     margin-bottom: 1rem;
   }
-  
+
   h2 {
     margin-bottom: 1rem;
   }
-  
+
   .reset-btn {
     background: none;
     border: none;
@@ -308,7 +308,7 @@ export default {
     cursor: pointer;
     margin-top: 2rem;
     color: #666;
-    
+
     &:hover {
       color: #000;
     }
