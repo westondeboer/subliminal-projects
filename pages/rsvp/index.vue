@@ -1,8 +1,9 @@
 <template>
   <div class="rsvp-container">
     <div class="rsvp-card">
-      <h1 class="rsvp-title">RSVP</h1>
-      <p class="rsvp-subtitle">Please join us. Let us know if you can make it.</p>
+      <h1 class="rsvp-title">{{ (page && page.title) ? page.title : 'RSVP' }}</h1>
+      <div v-if="page && page.content" class="rsvp-subtitle" v-html="page.content"></div>
+      <p v-else class="rsvp-subtitle">Please join us. Let us know if you can make it.</p>
 
       <transition name="fade" mode="out-in">
         <!-- Form State -->
@@ -68,7 +69,26 @@
 </template>
 
 <script>
+import { gql } from "nuxt-graphql-request";
+
 export default {
+  async asyncData({ $graphql }) {
+    try {
+      const query = gql`
+        query RSVPPage {
+          page(id: "rsvp", idType: URI) {
+            title
+            content
+          }
+        }
+      `;
+      const { page } = await $graphql.default.request(query);
+      return { page };
+    } catch (e) {
+      // Fallback if page not found or API issue
+      return { page: null };
+    }
+  },
   data() {
     return {
       loading: false,
