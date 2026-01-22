@@ -26,7 +26,7 @@
         <li><nuxt-link to="/privacy-policy">Privacy Policy</nuxt-link></li>
       </ul>
       <div class="copyright" v-if="globalContent">
-        {{globalContent.GlobalFields.footerCopyright}}
+        {{dynamicCopyright}}
       </div>
     </div>
   </footer>  
@@ -62,6 +62,19 @@ export default {
   async fetch() {
     const data = await this.$graphql.default.request(query)
     this.globalContent = data.globalContent;
+  },
+  computed: {
+    dynamicCopyright() {
+      if (!this.globalContent || !this.globalContent.GlobalFields.footerCopyright) return '';
+      const text = this.globalContent.GlobalFields.footerCopyright;
+      const currentYear = new Date().getFullYear();
+      const yearRegex = /(19|20)\d{2}/;
+      
+      if (yearRegex.test(text)) {
+        return text.replace(yearRegex, currentYear);
+      }
+      return `©${currentYear} ${text.replace(/^©\s*/, '')}`;
+    }
   }    
 }
 </script>
