@@ -1,20 +1,20 @@
 <template>
-  <nuxt-link :to="'/exhibitions/'+exhibition.slug" class="exhibition-thumb">
-    <div class="labels" v-if="exhibition.exhibitionCategories">
-      <li v-for="label in exhibition.exhibitionCategories.nodes" v-bind:key="label.slug">{{label.name}}</li>
+  <nuxt-link v-if="exhibition" :to="'/exhibitions/'+exhibition.slug" class="exhibition-thumb">
+    <div class="labels" v-if="categories.length">
+      <li v-for="label in categories" v-bind:key="label.slug">{{label.name}}</li>
     </div>  
     <div class="feature-img">
-      <FadeImage v-bind:src="exhibition.featuredImage.node.sourceUrl" />
+      <FadeImage v-if="featuredImageUrl" v-bind:src="featuredImageUrl" />
     </div>
     <h2 v-html="exhibition.title"></h2>
 
-    <ul class="artists"  v-if="exhibition.artists && exhibition.artists.nodes.length < 3" >
-      <li v-for="artist in exhibition.artists.nodes" v-bind:key="artist.slug">{{artist.name}}</li>
+    <ul class="artists"  v-if="artists.length && artists.length < 3" >
+      <li v-for="artist in artists" v-bind:key="artist.slug">{{artist.name}}</li>
     </ul>
 
 
     <div class="date">
-      <span v-html="exhibition.ExhibitionFields.startDate" /> — <span v-html="exhibition.ExhibitionFields.endDate" />
+      <span v-html="startDate" /> — <span v-html="endDate" />
     </div>
 
   </nuxt-link>
@@ -28,6 +28,33 @@ export default {
   },
   components: {
     FadeImage
+  },
+  computed: {
+    featuredImageUrl() {
+      // Safely access nested properties
+      if (this.exhibition && this.exhibition.featuredImage && this.exhibition.featuredImage.node) {
+        return this.exhibition.featuredImage.node.sourceUrl;
+      }
+      return null;
+    },
+    categories() {
+      if (this.exhibition && this.exhibition.exhibitionCategories && this.exhibition.exhibitionCategories.nodes) {
+        return this.exhibition.exhibitionCategories.nodes;
+      }
+      return [];
+    },
+    artists() {
+      if (this.exhibition && this.exhibition.artists && this.exhibition.artists.nodes) {
+        return this.exhibition.artists.nodes;
+      }
+      return [];
+    },
+    startDate() {
+      return (this.exhibition && this.exhibition.ExhibitionFields) ? this.exhibition.ExhibitionFields.startDate : '';
+    },
+    endDate() {
+      return (this.exhibition && this.exhibition.ExhibitionFields) ? this.exhibition.ExhibitionFields.endDate : '';
+    }
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <transition-group tag="div" :name="transitionName" class="carousel-view">
       <nuxt-link :to="'/exhibitions/' + slides[current].slug" v-if="show" :key="current" :class="'slide ' + displayClass">
         <div class="feature-img">
-          <div v-if="slides[current].featuredImage" class="wrap">
+          <div v-if="slides[current].featuredImage && slides[current].featuredImage.node" class="wrap">
             <img v-bind:src="slides[current].featuredImage.node.sourceUrl" alt="">      
           </div>
         </div>
