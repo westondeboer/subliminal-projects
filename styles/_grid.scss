@@ -1,0 +1,15 @@
+.container {
+  //margin: 0 auto;
+  //max-width: 1160px;
+  padding: 0 2vw;
+  @include breakpoint(small) {
+    padding: 0 5vw;
+  }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-between;  
+}
+

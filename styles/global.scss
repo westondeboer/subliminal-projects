@@ -1,0 +1,157 @@
+@import 'resources/_vars';
+@import 'resources/_mixins';
+
+html {
+  //font-family: "Sentinel SSm A","Sentinel SSm B";
+  font-family: "din-2014", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  //font-size: 6.25%;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+  background-color: $white;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+* {
+  &:focus {
+    outline: none;
+  }
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul {
+  display: flex;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+@import 'grid';
+@import 'type';
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.5s;
+}
+
+.page-enter {
+  transform: rotate(0deg) translateX(-100vw);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.page-leave-active {
+  //opacity: 0;
+  transform: rotate(0deg) translateX(100vw);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+@mixin button {
+  @include sans;
+  background-color: $dark;
+  color: $light;
+  font-size: 1em;
+  font-weight: bold;
+  transition: all 0.2s ease-out;
+  &:hover {
+    background-color: $grey;
+  }
+}
+
+input:not([type="submit"]), select, textarea {
+  @include sans;
+  @include type-regs;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  border: 2px solid $dark;
+  padding-left: 10px;
+  outline: none;
+  text-transform: uppercase;
+  -webkit-appearance: none;
+  -moz-appearance: none;  
+  &::placeholder {
+    color: $grey;
+  }
+}
+
+input[type='submit'] {
+  background: transparent;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 0;
+  border: none;
+  @include button;
+  text-transform: uppercase;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;  
+}
+
+.primary-button {
+  @include button;
+  display: inline-block;
+  padding: $factor * 0.5;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  &:hover {
+    padding:  $factor * 0.5 $factor * 0.7;
+  }
+}
+
+.formatted-content {
+  @include wysiwyg;
+}
+
+.footer-content {
+  p {
+    margin-bottom: $factor*.5;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }  
+}
+
+.pagination {
+  margin: $factor;
+  text-align: center;
+}
+.load-more {
+  min-height: $factor * 2;
+}
+

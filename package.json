@@ -1,0 +1,26 @@
+{
+  "name": "subliminal-projects",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "spa": "nuxt generate --spa",
+    "staging": "npm run spa && echo 'User-agent: *\nDisallow: /' > dist/robots.txt"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "nuxt": "^2.14.0",
+    "vue2-touch-events": "^2.3.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/google-analytics": "^2.4.0",
+    "@nuxtjs/style-resources": "^1.0.0",
+    "graphql": "^15.5.0",
+    "sass": "^1.53.0",
+    "sass-loader": "10.1.1",
+    "nuxt-graphql-request": "^4.0.0"
+  }
+}

@@ -1,0 +1,26 @@
+body {
+  color: $dark;
+}
+
+a {
+  color: $grey;
+}
+
+h1, h2, h3, h4, h5 {
+  line-height: 1;
+  @include type-regs;
+}
+
+.page-title,
+.section-title {
+  text-align: center;
+  padding: $factor * 2  
+}
+
+// h2 {
+//   @include type-big;
+// }
+
+// h3 {
+//   @include type-big-sub;
+// }
