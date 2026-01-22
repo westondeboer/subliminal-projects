@@ -4,7 +4,7 @@
       <li v-for="label in exhibition.exhibitionCategories.nodes" v-bind:key="label.slug">{{label.name}}</li>
     </div>  
     <div class="feature-img">
-      <FadeImage v-bind:src="exhibition.featuredImage.node.sourceUrl" />
+      <FadeImage v-if="exhibition.featuredImage && exhibition.featuredImage.node" v-bind:src="exhibition.featuredImage.node.sourceUrl" />
     </div>
     <h2 v-html="exhibition.title"></h2>
 
