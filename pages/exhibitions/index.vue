@@ -6,7 +6,7 @@
         <nuxt-link v-bind:to="'/exhibitions/' + exhibition.slug" class="current-show-wrap">
           <div class="feature-img">
             <div class="wrap">
-              <FadeImage v-bind:src="exhibition.featuredImage.node.sourceUrl" />
+              <FadeImage v-if="exhibition.featuredImage && exhibition.featuredImage.node" v-bind:src="exhibition.featuredImage.node.sourceUrl" />
             </div>
           </div>
           <div class="lockdown">

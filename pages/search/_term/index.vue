@@ -4,7 +4,7 @@
         <h1>Search Results for: {{this.$route.params.term}}</h1>
       </div>
       <div class="container grid">
-        <ExhibitionThumb v-for="item in exhibitions.edges" v-bind:key="item.node.slug" v-bind:exhibition="item.node" />
+        <ExhibitionThumb v-for="item in exhibitions.edges" v-if="item && item.node" v-bind:key="item.node.slug" v-bind:exhibition="item.node" />
       </div>
       <div class="pagination">
         <div v-if="exhibitions.pageInfo.hasNextPage" class="load-more">

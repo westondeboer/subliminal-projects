@@ -7,6 +7,7 @@
       <ExhibitionThumb
         class="past-exhibition"
         v-for="item in exhibitions"
+        v-if="item && item.node"
         v-bind:key="item.node.slug"
         v-bind:exhibition="item.node"
       />
