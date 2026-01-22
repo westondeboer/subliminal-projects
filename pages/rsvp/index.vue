@@ -72,25 +72,9 @@
 import { gql } from "nuxt-graphql-request";
 
 export default {
-  async asyncData({ $graphql }) {
-    try {
-      const query = gql`
-        query RSVPPage {
-          page(id: "rsvp", idType: URI) {
-            title
-            content
-          }
-        }
-      `;
-      const { page } = await $graphql.default.request(query);
-      return { page };
-    } catch (e) {
-      // Fallback if page not found or API issue
-      return { page: null };
-    }
-  },
   data() {
     return {
+      page: null,
       loading: false,
       submitted: false,
       error: null,
@@ -100,6 +84,23 @@ export default {
         partySize: 1
       }
     };
+  },
+  async mounted() {
+    try {
+      const query = gql`
+        query RSVPPage {
+          page(id: "rsvp", idType: URI) {
+            title
+            content
+          }
+        }
+      `;
+      const { page } = await this.$graphql.default.request(query);
+      this.page = page;
+    } catch (e) {
+      console.error("Failed to fetch RSVP content", e);
+      // Fallback is handled by initial null state in template
+    }
   },
   methods: {
     async submitForm() {
